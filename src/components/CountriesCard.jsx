@@ -8,10 +8,13 @@ export default function CountriesCard({ country }) {
       />
       <p className='font-bold text-xl mb-2 mx-1'>{country.name}</p>
       <span className='text-sm mb-2 mx-1'>
-        Capital: {country.capital || 'No capital'}
+        <strong>Capital: </strong>{country.capital || 'No capital'}
       </span>
       <span className='text-sm mb-2 mx-1'>
-        Population: {Intl.NumberFormat('en-US').format(country.population)}
+        <strong>Native Name: </strong>{country.nativeName || 'No capital'}
+      </span>
+      <span className='text-sm mb-2 mx-1'>
+        <strong>Population: </strong>{Intl.NumberFormat('en-US').format(country.population)}
       </span>
     </div>
   );
