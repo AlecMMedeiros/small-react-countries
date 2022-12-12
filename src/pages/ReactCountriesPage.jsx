@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CountriesCard from '../components/CountriesCard';
+import FilterFavorite from '../components/FilterFavorite';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import Main from '../components/Main';
@@ -9,7 +10,8 @@ import countryTable from '../database/countries.json';
 export default function ReactCountriesPage() {
   const [countryFilter, setCountryFilter] = useState('');
   const [renderCountries, setRenderCountries] = useState(countryTable);
-  const [favoriteCountries, setFavoriteCountries ] = useState([])
+  const [favoriteCountries, setFavoriteCountries] = useState([]);
+  const [showFavorite, setShowrFavorite] = useState(false);
 
   const handleCountryFilter = (selectedCountry) => {
     setCountryFilter(selectedCountry);
@@ -29,34 +31,63 @@ export default function ReactCountriesPage() {
   };
 
   const setFavorite = (newFavorite) => {
-    if(favoriteCountries.includes(newFavorite)) {
-      const newSetCountries = favoriteCountries.filter((country) => country !== newFavorite);
+    if (favoriteCountries.includes(newFavorite)) {
+      const newSetCountries = favoriteCountries.filter(
+        (country) => country !== newFavorite
+      );
       setFavoriteCountries(newSetCountries);
-      
     } else {
-      setFavoriteCountries((currentfavotiteCountries) => [...currentfavotiteCountries, newFavorite])
-    };
-  };  
+      setFavoriteCountries((currentfavotiteCountries) => [
+        ...currentfavotiteCountries,
+        newFavorite,
+      ]);
+    }
+  };
+
+  const renderFavorite = ({ currentTarget }) => {
+    setShowrFavorite(currentTarget.checked);
+  };
   return (
     <>
       <Header />
       <Main>
-      <Status renderCountries={renderCountries} favoriteCountries={favoriteCountries} />
+        <Status
+          renderCountries={renderCountries}
+          favoriteCountries={favoriteCountries}
+        />
         <Input
-          LabelDescription='Informe o nome do país (ao menos 03 caracters):'
+          LabelDescription='Enter the name of the country (at least 03 characters):'
           type='text'
           id='filterCountry'
           action={handleCountryFilter}
           value={countryFilter}
           autoFocus
         />
+        <FilterFavorite
+          LabelDescription='Show favorite only:'
+          id='filterFavorite'
+          onClick={renderFavorite}
+        />
         <section className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-          {renderCountries.map((data) => (
-            <CountriesCard key={data.name} country={data} setFavorite={setFavorite} favotiteCountries=
-            {favoriteCountries} />
-          ))}
+          {showFavorite
+            ? renderCountries.filter((ele) => favoriteCountries.includes(ele.name)).map((data) => (
+                <CountriesCard
+                  key={data.name}
+                  country={data}
+                  setFavorite={setFavorite}
+                  favotiteCountries={favoriteCountries}
+                />
+              ))
+            : renderCountries.map((data) => (
+                <CountriesCard
+                  key={data.name}
+                  country={data}
+                  setFavorite={setFavorite}
+                  favotiteCountries={favoriteCountries}
+                />
+              ))}
         </section>
       </Main>
     </>
   );
-};
+}
