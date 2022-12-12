@@ -1,10 +1,8 @@
 import { useState } from 'react';
+import BarFixed from '../components/BarFixed';
 import CountriesCard from '../components/CountriesCard';
-import FilterFavorite from '../components/FilterFavorite';
 import Header from '../components/Header';
-import Input from '../components/Input';
 import Main from '../components/Main';
-import Status from '../components/Status';
 import countryTable from '../database/countries.json';
 
 export default function ReactCountriesPage() {
@@ -47,37 +45,30 @@ export default function ReactCountriesPage() {
   const renderFavorite = ({ currentTarget }) => {
     setShowrFavorite(currentTarget.checked);
   };
+
   return (
     <>
       <Header />
-      <Main>
-        <Status
+        <BarFixed
           renderCountries={renderCountries}
           favoriteCountries={favoriteCountries}
-        />
-        <Input
-          LabelDescription='Enter the name of the country (at least 03 characters):'
-          type='text'
-          id='filterCountry'
-          action={handleCountryFilter}
-          value={countryFilter}
-          autoFocus
-        />
-        <FilterFavorite
-          LabelDescription='Show favorite only:'
-          id='filterFavorite'
-          onClick={renderFavorite}
-        />
+          handleCountryFilter={handleCountryFilter}
+          countryFilter={countryFilter}
+          renderFavorite={renderFavorite}
+        />       
+      <Main>
         <section className='grid grid-cols-2 gap-4 md:grid-cols-4'>
           {showFavorite
-            ? renderCountries.filter((ele) => favoriteCountries.includes(ele.name)).map((data) => (
-                <CountriesCard
-                  key={data.name}
-                  country={data}
-                  setFavorite={setFavorite}
-                  favotiteCountries={favoriteCountries}
-                />
-              ))
+            ? renderCountries
+                .filter((ele) => favoriteCountries.includes(ele.name))
+                .map((data) => (
+                  <CountriesCard
+                    key={data.name}
+                    country={data}
+                    setFavorite={setFavorite}
+                    favotiteCountries={favoriteCountries}
+                  />
+                ))
             : renderCountries.map((data) => (
                 <CountriesCard
                   key={data.name}

@@ -1,4 +1,4 @@
-export default function Input({ LabelDescription, type, id, action, value, autoFocus='false' }) {
+export default function InputText({ LabelDescription, type, id, action, value, autoFocus='false' }) {
   const handleAction = ({ currentTarget }) => {
     if (action) {
       const getValue = currentTarget.value;
@@ -7,12 +7,12 @@ export default function Input({ LabelDescription, type, id, action, value, autoF
     }
   };
   return (
-    <div className='flex flex-col my-4 justify-center'>
+    <div className='flex flex-col my-4 justify-center px-4 rounded'>
       <label className='text-sm mb-1' htmlFor={id}>
         {LabelDescription}
         </label>
         <input
-          className='caret-emerald-500 border focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 p-1 rounded-sm'
+          className='w-[21rem] caret-emerald-500 border focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 p-1 rounded-sm'
           id={id}
           type={type}
           value={value}
