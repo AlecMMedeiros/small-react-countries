@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import BarFixed from '../components/BarFixed';
 import CountriesCard from '../components/CountriesCard';
 import Header from '../components/Header';
 import Main from '../components/Main';
@@ -48,14 +47,13 @@ export default function ReactCountriesPage() {
 
   return (
     <>
-      <Header />
-        <BarFixed
-          renderCountries={renderCountries}
-          favoriteCountries={favoriteCountries}
-          handleCountryFilter={handleCountryFilter}
-          countryFilter={countryFilter}
-          renderFavorite={renderFavorite}
-        />       
+      <Header
+        renderCountries={renderCountries}
+        favoriteCountries={favoriteCountries}
+        handleCountryFilter={handleCountryFilter}
+        countryFilter={countryFilter}
+        renderFavorite={renderFavorite}
+      />
       <Main>
         <section className='grid grid-cols-2 gap-4 md:grid-cols-4'>
           {showFavorite

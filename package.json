@@ -18,8 +18,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "updateCSS":"exec tailwindcss -i ./src/styles/index.css -o ./src/styles/tailwind.css --watch",
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
-    "dev": "craco start && exec tailwindcss -i ./src/styles/index.css -o ./src/styles/tailwind.css --watch --full",
+    "dev": "craco start",
     "build": "craco build",
     "prod:local": "craco build && serve -s build",
     "prod:cloud": "craco build && netlify deploy --prod --open --dir build",

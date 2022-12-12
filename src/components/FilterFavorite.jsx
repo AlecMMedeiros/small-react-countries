@@ -1,7 +1,7 @@
 export default function FilterFavorite({LabelDescription, id, onClick }) {
   return (
-    <div className='flex flex-col w-fit mb-1 px-4 rounded'>
-      <label className='text-sm mb-1' htmlFor={id}>
+    <div className='flex flex-col w-fit mb-1 px-4 rounded text-xs'>
+      <label className='text-xs mb-1' htmlFor={id}>
         {LabelDescription}
       </label>
       <input
